@@ -1,10 +1,43 @@
 .App {
-  text-align: center;
+  min-height: 100vh;
+  background-color: #282c34;
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+.Board {
+  width: 420px;
+  height: 640px;
+  display: block;
+  margin: 0 auto;
+  border: 1px solid white;
+}
+
+.Board-Valid {
+  margin-left: 22px;
+  margin-right: 22px;
+  margin-top: 35px;
+  border: 1px solid white;
+  height: calc(100% - 35px);
+
+  display: grid;
+  /*grid-template-columns: 25% [col-1] 25% [col-2] 25% [col-3] 25% [col-4];*/
+  grid-template-columns: repeat(4, 25% [col-start]);
+  grid-template-rows: repeat(80, 8px [row-start]);
+}
+
+.Dash-Card {
+  background-color: white;
+  margin-left: 15px;
+  margin-right: 15px;
+
+  /*
+  grid-row-start: row-start 1;
+  grid-row-end: row-start 16;
+  */
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -14,14 +47,17 @@
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: start;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.App-header h1 {
+  margin-left: 20px;
+  font-size: calc(10px + 2vmin);
 }
 
 .App-link {
