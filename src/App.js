@@ -1,26 +1,29 @@
 import logo from './logo.svg';
 import './App.css';
+import Draggable from 'react-draggable';
 
 import AppHeader from './components/header';
 import DashCard from './components/dash-card';
+import CardCreator from './components/card-creator';
+import Board from './components/board';
+import { useEffect } from 'react';
+
 
 function App() {
+  useEffect( () => {
+    document.title = "Dashboard";
+  }, []);
+
+
   return (
     <div className="App">
+
       <AppHeader/>
 
-      <div className="Board">
-        <div className="Board-Valid">
+      <div className="DashBoard">
+        <CardCreator/>
 
-          <DashCard background="teal" col="2" row="31"/>
-          <DashCard background="magenta" col="3" row="42"/>
-          <DashCard background="pink" col="0" row="1"/>
-          <DashCard col="1" row="1"/>
-          <DashCard col="2" row="0"/>
-
-
-        </div>
-
+        <Board/>
       </div>
 
 
