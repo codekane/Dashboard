@@ -1,6 +1,9 @@
+import { useSelector } from 'react-redux';
 import DashCard from './dash-card';
 
 export default function Board(props) {
+  const cards = useSelector(state => state.board.contents);
+  console.log(cards);
 
   const test = "This is a test of the BODY system!!@!!!"
 
@@ -8,11 +11,9 @@ export default function Board(props) {
     <div className="Board">
       <div className="Board-Valid">
 
-        <DashCard background="teal" grid={[31, 2]} title="Dashboard" color="teal" body={test}/>
-        <DashCard background="magenta" grid={[42, 3]} title="Stonkk" color="magenta" body={test}/>
-        <DashCard background="pink" grid={[1, 0]} title="Ryan Horricks" color="pink" body={test}/>
-        <DashCard grid={[1, 1]} title="Potential Job" color="red" body={test}/>
-        <DashCard grid={[1, 2]} title="Potential Job" color="red" body={test}/>
+        {cards.map(card => (<DashCard color={card.color} key={card.id}
+                                      title={card.title} grid={card.grid} body={card.body}/>)
+        )}
 
 
       </div>

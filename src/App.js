@@ -9,6 +9,7 @@ import Board from './components/board';
 import { useEffect } from 'react';
 
 
+
 function App() {
   useEffect( () => {
     document.title = "Dashboard";
