@@ -71,6 +71,9 @@
   margin-left: 3px;
   margin-right: 3px;
   cursor: default;
+  max-height: 45px;
+  overflow: hidden;
+  margin-bottom: 0px;
 }
 
 

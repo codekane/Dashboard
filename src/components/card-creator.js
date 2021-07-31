@@ -23,7 +23,6 @@ export default function CardCreator(props) {
     setTitle('');
     setBody('');
     setColor('#9999FF');
-
   }
 
   return(
@@ -47,8 +46,5 @@ export default function CardCreator(props) {
         </form>
       </div>
     </div>
-
-
   )
-
 }
