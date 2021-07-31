@@ -52,6 +52,27 @@ function rootReducer(state = initialState, action) {
     case 'UPDATE_CARD': {
       return state
     }
+    case 'CREATE_CARD': {
+      return {
+        ...state,
+        board: {
+          ...state.board,
+          contents: [
+            ...state.board.contents,
+            action.payload
+          ]
+        }
+      }
+      /*
+      return state.board.contents.push(action.payload)
+      var new_state = state;
+      new_state.board.contents.push(action.payload);
+
+      return new_state
+      console.log(new_state);
+      */
+
+    }
     default:
       return state
   }

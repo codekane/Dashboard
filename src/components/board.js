@@ -3,9 +3,6 @@ import DashCard from './dash-card';
 
 export default function Board(props) {
   const cards = useSelector(state => state.board.contents);
-  console.log(cards);
-
-  const test = "This is a test of the BODY system!!@!!!"
 
   return(
     <div className="Board">

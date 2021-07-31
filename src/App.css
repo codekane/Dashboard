@@ -79,18 +79,58 @@
  * FORM */
 
 .CardCreator {
-  width: 200px;
+  width: 240px;
   //height: 100%;
   min-height: 500px;
 }
-.CardCreator form {
-  padding: 5px 5px 5px 5px;
+.CardCreator header {
+  height: 120px;
+  border-bottom: 3px solid black;
 }
 
-div.CardForm {
+.CardForm header textarea {
+  border: none;
+  border-style: none;
+  font-size: 3em;
+  max-width: 240px;
+  padding: 0;
+  resize: none;
+}
+
+.CardForm header textarea:focus {
+  outline: none;
+}
+
+.CardForm button[type=submit] {
+  position: relative;
+  top: 34px;
+  left: 175px;
+}
+
+textarea#CardFormBody {
+  width: 240px;
+  padding: 0;
+  resize: none;
+  border: none;
+  height: 135px;
+  font-size: 3em;
+  margin-top: 36px;
+}
+textarea#CardFormBody:focus {
+  outline: none;
+}
+
+.CardForm {
   background-color: white;
-  width: 200px;
-  height: 300px;
+  width: 240px;
+  height: 360px;
+  margin-top: 40px;
+}
+
+input#ColorPicker {
+  position: relative;
+  left: 166px;
+  top: 29px;
 }
 
 /*
