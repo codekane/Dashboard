@@ -11,35 +11,35 @@ const initialState = {
       {
         id: 90210,
         color: "teal",
-        grid: [31, 2],
+        grid: [248, 231],
         title: "Dashboard",
         body: test
       },
       {
         id: 90211,
         color: "magenta",
-        grid: [42, 3],
+        grid: [336, 346],
         title: "Stonkk",
         body: test
       },
       {
         id: 90212,
         color: "pink",
-        grid: [1, 0],
+        grid: [8, 15],
         title: "Ryan Horricks",
         body: test
       },
       {
         id: 90213,
         color: "red",
-        grid: [1, 1],
+        grid: [8, 120],
         title: "Job Interview",
         body: test
       },
       {
         id: 90214,
         color: "purple",
-        grid: [1, 2],
+        grid: [8, 240],
         title: "Dashboard",
         body: test
       }

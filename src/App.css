@@ -34,8 +34,9 @@
   position: relative;
 
   display: grid;
-  grid-template-columns: repeat(4, 25% [col-start]);
-  grid-template-rows: repeat(80, 8px [row-start]);
+  grid-template-columns: repeat(462, 1px [x]);
+  grid-template-rows: repeat(992, 1px [y]);
+  grid-gap: 0px;
 }
 
 /*
@@ -46,7 +47,7 @@
   background-color: white;
   margin: 10px 10px 10px 10px;
   height: 120px;
-  width: 80%;
+  width: 80px;
 }
 
 .Dash-Card header {

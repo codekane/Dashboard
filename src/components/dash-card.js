@@ -10,10 +10,8 @@ export default function DashCard(props) {
   const style= {
     height: "120px",
     width: "80px",
-    gridRowStart: `row-start ${grid[0]}`,
-    gridRowEnd: `row-start ${grid[0] + 16}`,
-    gridColumnStart: `col-start ${grid[1]}`,
-    gridColumnEnd: `col-start ${grid[1]}`
+    gridRow: `${grid[0]} / ${grid[0] + 80}`,
+    gridColumn: `${grid[1]} / ${grid[1] + 120}`
   };
 
   const handleDrag = (e, ui) => {
@@ -28,8 +26,14 @@ export default function DashCard(props) {
           <strong>{props.title}</strong>
         </header>
         <p>{props.body}</p>
-        <span style={{fontSize: "10px", marginTop: "-10px"}}>"X: {Math.round(position.x)}, Y: {Math.round(position.y)}"</span>
+        <span style={{fontSize: "10px", marginTop: "-10px", display: "none"}}>"X: {Math.round(position.x)}, Y: {Math.round(position.y)}"</span>
       </div>
     </Draggable>
   )
 }
+/*
+ gridRowStart: `x ${grid[0]}`,
+    gridRowEnd: `x ${grid[0] + 80}`,
+    gridColumnStart: `y ${grid[1]}`,
+    gridColumnEnd: `y ${grid[1] + 120}`
+    */
