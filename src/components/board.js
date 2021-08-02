@@ -7,8 +7,8 @@ export default function Board(props) {
   return(
     <div className="Board">
       <div className="Board-Valid">
-        {cards.map(card => (<DashCard color={card.color} key={card.id}
-                                      title={card.title} grid={card.grid} body={card.body}/>)
+        {cards.map(card => (<DashCard color={card.color} key={card.id} title={card.title}
+                                      body={card.body} position={card.position}/>)
         )}
       </div>
     </div>

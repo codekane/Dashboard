@@ -2,6 +2,27 @@ import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
+function saveToLocalStorage(state) {
+  try {
+    const serializedState = JSON.stringify(state);
+    localStorage.setItem("state", state);
+  } catch (e) {
+    console.warn(e);
+  }
+}
+
+function loadFromLocalStorage() {
+  try {
+    const serializedState = localStorage.getItem("state");
+    if (serializedState === null) return initialState;
+    return JSON.parse(serializedState);
+
+  } catch (e) {
+    console.warn(e);
+  }
+}
+
+
 const test = "This is a test of the BODY system!!@!!!"
 
 const initialState = {
@@ -11,35 +32,35 @@ const initialState = {
       {
         id: 90210,
         color: "teal",
-        grid: [248, 231],
+        position: { x: 231, y: 248 },
         title: "Dashboard",
         body: test
       },
       {
         id: 90211,
         color: "magenta",
-        grid: [336, 346],
+        position: { x: 346, y: 336},
         title: "Stonkk",
         body: test
       },
       {
         id: 90212,
         color: "pink",
-        grid: [8, 15],
+        position: { x: 15, y: 8 },
         title: "Ryan Horricks",
         body: test
       },
       {
         id: 90213,
         color: "red",
-        grid: [8, 120],
+        position: { x: 120, y: 8 },
         title: "Job Interview",
         body: test
       },
       {
         id: 90214,
         color: "purple",
-        grid: [8, 240],
+        position: { x: 240, y: 8 },
         title: "Dashboard",
         body: test
       }
@@ -47,7 +68,7 @@ const initialState = {
   }
 }
 
-function rootReducer(state = initialState, action) {
+function rootReducer(state = loadFromLocalStorage(), action) {
   switch (action.type) {
     case 'UPDATE_CARD': {
       return state
@@ -63,15 +84,6 @@ function rootReducer(state = initialState, action) {
           ]
         }
       }
-      /*
-      return state.board.contents.push(action.payload)
-      var new_state = state;
-      new_state.board.contents.push(action.payload);
-
-      return new_state
-      console.log(new_state);
-      */
-
     }
     default:
       return state
@@ -81,4 +93,6 @@ function rootReducer(state = initialState, action) {
 const composedEnhancer = composeWithDevTools(applyMiddleware(thunkMiddleware));
 
 const store = createStore(rootReducer, composedEnhancer);
+
+store.subscribe( () => saveToLocalStorage(JSON.stringify(store.getState())) );
 export default store
