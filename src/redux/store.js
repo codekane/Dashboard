@@ -68,10 +68,34 @@ const initialState = {
   }
 }
 
+function cardReducer(card, action) {
+  if (card.id !== action.payload.id) return card;
+  switch (action.type) {
+    case "UPDATE_CARD_POSITION":
+      return Object.assign({}, card, { position: action.payload.position })
+    default:
+      return card
+  }
+  //return Object.assign({}, card, { position: action.payload.position })
+  return {
+    ...card,
+    position: action.payload.position
+  }
+
+}
+
 function rootReducer(state = loadFromLocalStorage(), action) {
   switch (action.type) {
-    case 'UPDATE_CARD': {
-      return state
+    case 'UPDATE_CARD_POSITION': {
+      return {
+        ...state,
+        board: {
+          ...state.board,
+          contents: state.board.contents.map(card => cardReducer(card, action))
+
+        }
+
+      }
     }
     case 'CREATE_CARD': {
       return {

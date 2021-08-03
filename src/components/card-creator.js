@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import store from '../redux/store';
 
 export default function CardCreator(props) {
@@ -15,10 +15,16 @@ export default function CardCreator(props) {
     return d.getTime();
   }
 
+  
   const handleSubmit = (event) => {
     event.preventDefault();
     store.dispatch({
-      type: "CREATE_CARD", payload: { title: title, color: color, body: body, id: generateID() }
+      type: "CREATE_CARD", payload: { 
+        title: title, 
+        color: color, 
+        body: body, 
+        id: generateID() 
+      }
     })
     setTitle('');
     setBody('');
