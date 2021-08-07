@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import Draggable from 'react-draggable';
 
+import NavBar from './components/navbar.js';
 import AppHeader from './components/header';
 import DashCard from './components/dash-card';
 import CardCreator from './components/card-creator';
@@ -19,12 +20,13 @@ function App() {
   return (
     <div className="App">
 
-      <AppHeader/>
 
-      <div className="DashBoard">
-        <CardCreator/>
-
-        <Board/>
+      <NavBar/>
+      <div>
+        <div className="DashBoard">
+          <Board/>
+          <CardCreator/>
+        </div>
       </div>
 
 

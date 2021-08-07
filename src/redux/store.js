@@ -92,9 +92,16 @@ function rootReducer(state = loadFromLocalStorage(), action) {
         board: {
           ...state.board,
           contents: state.board.contents.map(card => cardReducer(card, action))
-
         }
-
+      }
+    }
+    case 'DELETE_CARD': {
+      return {
+        ...state,
+        board: {
+          ...state.board,
+          contents: state.board.contents.filter(card => card.id !== action.payload.id)
+        }
       }
     }
     case 'CREATE_CARD': {

@@ -24,6 +24,19 @@ export default function DashCard(props) {
     console.log(event, props, triggerEvent, data);
   }
 
+  function deleteCard(event) {
+
+    store.dispatch({
+        type: "DELETE_CARD",
+        payload: {
+          id: props.id
+        }
+      })
+
+
+    console.log(MENU_ID);
+  }
+
   function displayMenu(e) {
     show(e)
   }
@@ -85,9 +98,10 @@ export default function DashCard(props) {
         </div>
       </Draggable>
       <Menu id={props.id}>
-        <Item onClick={handleItemClick}>Complete</Item>
-        <Item onClick={handleItemClick}>Inspect</Item>
-        <Item onClick={handleItemClick}>Discard</Item>
+        <Item onClick={deleteCard}>Discard</Item>
+        <Item disabled onClick={handleItemClick}>Complete</Item>
+        <Item disabled onClick={handleItemClick}>Inspect</Item>
+
       </Menu>
     </>
   )

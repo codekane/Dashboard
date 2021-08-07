@@ -33,6 +33,7 @@ export default function CardCreator(props) {
 
   return(
     <div className="CardCreator">
+      <h2 style={{color: "white", textAlign: "center"}}>New Card</h2>
       <div className="CardForm">
         <form onSubmit={handleSubmit}>
           <header style={{backgroundColor: color}}>
