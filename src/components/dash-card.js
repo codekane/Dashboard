@@ -25,12 +25,16 @@ export default function DashCard(props) {
   }
 
   function deleteCard(event) {
+
     store.dispatch({
-      type: "DELETE_CARD",
-      payload: {
-        id: props.id
-      }
-    })
+        type: "DELETE_CARD",
+        payload: {
+          id: props.id
+        }
+      })
+
+
+    console.log(MENU_ID);
   }
 
   function displayMenu(e) {
@@ -55,7 +59,25 @@ export default function DashCard(props) {
     const { x, y } = delta
     setPosition({ x: position.x + x, y: position.y + y });
     setDelta({ x: 0, y: 0 });
+  }
 
+  // Update the cards location upon expiration of life.
+  // Doesn't seem to ever be called!?
+  useEffect( () => {
+    return () => {
+      store.dispatch({
+        type: "UPDATE_CARD_POSITION",
+        payload: {
+          id: props.id,
+          position: position,
+        }
+      })
+    };
+  }, [])
+
+  // FYI this calls it at the end of every move (interestingly)
+  useEffect( () => {
+    console.log(initPos);
     store.dispatch({
       type: "UPDATE_CARD_POSITION",
       payload: {
@@ -63,7 +85,7 @@ export default function DashCard(props) {
         position: position,
       }
     })
-  }
+  }, [position])
 
   return(
     <>
@@ -79,6 +101,7 @@ export default function DashCard(props) {
         <Item onClick={deleteCard}>Discard</Item>
         <Item disabled onClick={handleItemClick}>Complete</Item>
         <Item disabled onClick={handleItemClick}>Inspect</Item>
+
       </Menu>
     </>
   )
