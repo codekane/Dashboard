@@ -24,7 +24,7 @@ function App() {
       <NavBar/>
       <div>
         <div className="DashBoard">
-          <Board/>
+          <Board title="personal" id="test"/>
           <CardCreator/>
         </div>
       </div>

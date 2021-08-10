@@ -8,45 +8,34 @@ import 'react-contexify/dist/ReactContexify.css';
 
 
 export default function DashCard(props) {
-  const [background, setBackground] = useState(props.background || "white");
-  const [dragging, setDragging] = useState(false);
-  const [position, setPosition] = useState(props.position || { x: 150, y: 150 });
+  const card = props.card;
+
+  const [editing, setEditing] = useState(false);
+  const [position, setPosition] = useState(card.position || { x: 150, y: 150 });
+  const initPos = card.position || { x: 150, y: 150 };
+
   const [delta, setDelta] = useState({ x: 0, y: 0 });
-  const initPos = props.position || { x: 150, y: 150 };
 
-  const MENU_ID=props.id;
-
-  const { show } = useContextMenu({
-    id: MENU_ID,
-  });
+  const { show } = useContextMenu({ id: card.id });
+  function displayMenu(e) { show(e) }
 
   function handleItemClick({ event, props, triggerEvent, data }) {
     console.log(event, props, triggerEvent, data);
   }
 
   function deleteCard(event) {
-
     store.dispatch({
         type: "DELETE_CARD",
         payload: {
-          id: props.id
+          id: card.id
         }
       })
-
-
-    console.log(MENU_ID);
   }
 
-  function displayMenu(e) {
-    show(e)
-  }
 
   const style= {
-    height: "120px",
-    width: "80px",
     gridRow: `${initPos.y} / ${initPos.y + 80}`,
-    gridColumn: `${initPos.x} / ${initPos.x + 120}`,
-    transform: 'none !important'
+    gridColumn: `${initPos.x} / ${initPos.x + 120}`
   };
 
 
@@ -65,28 +54,37 @@ export default function DashCard(props) {
     store.dispatch({
       type: "UPDATE_CARD_POSITION",
       payload: {
-        id: props.id,
+        id: card.id,
         position: position,
       }
     })
   }, [position])
 
+  if (!editing) {
+
   return(
     <>
       <Draggable  bounds="parent" onDrag={handleDrag} onStop={handleDragStop} position={{x: 0, y:0}}>
         <div className="Dash-Card" style={style} onContextMenu={show}>
-          <header style={{backgroundColor: props.color}}>
-            <strong>{props.title}</strong>
+          <header style={{backgroundColor: card.color}}>
+            <strong>{card.title}</strong>
           </header>
-          <p>{props.body}</p>
+          <p>{card.body}</p>
         </div>
       </Draggable>
-      <Menu id={props.id}>
-        <Item onClick={deleteCard}>Discard</Item>
+      <Menu id={card.id}>
+        <Item onClick={handleItemClick}>Edit></Item>
+        <Item onClick={deleteCard}>Delete</Item>
         <Item disabled onClick={handleItemClick}>Complete</Item>
         <Item disabled onClick={handleItemClick}>Inspect</Item>
-
       </Menu>
     </>
   )
+  } else if (editing == true) {
+    return(
+      <>
+        <h1>PENIS</h1>
+      </>
+    )
+  }
 }
