@@ -7,7 +7,7 @@ export default function EditCardForm(props) {
   const card = props.card;
 
   const [title, setTitle] = useState(card.title || '');
-  const [body, setBody] = useState('');
+  const [body, setBody] = useState(card.body || '');
   const [color, setColor] = useState(card.color);
 
   const changeTitle = (event) => { setTitle(event.target.value); }
@@ -33,6 +33,19 @@ export default function EditCardForm(props) {
     setBody('');
     setColor('#9999FF');
   }
+  
+  const updateCard = (event) => {
+    event.preventDefault();
+    store.dispatch({
+      type: "UPDATE_CARD", payload: {
+        id: card.id,
+        title: title,
+        color: color,
+        body: body,
+        editing: false
+      }
+    })
+  }
 
 
   const handleContextMenu = (event) => {
@@ -42,7 +55,7 @@ export default function EditCardForm(props) {
 
 
   return(
-    <form onSubmit={handleSubmit} id="edit-card" onContextMenu={handleContextMenu}>
+    <form onSubmit={updateCard} id="edit-card" onContextMenu={handleContextMenu}>
       <header style={{backgroundColor: color}}>
         <textarea type="text" name="title" 
           placeholder="Title" value={title} 

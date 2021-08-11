@@ -73,6 +73,19 @@ function cardReducer(card, action) {
   switch (action.type) {
     case "UPDATE_CARD_POSITION":
       return Object.assign({}, card, { position: action.payload.position })
+    case "UPDATE_CARD":
+      return {
+        ...card,
+        title: action.payload.title,
+        color: action.payload.color,
+        body: action.payload.body,
+        editing: false
+      }
+    case "EDIT_CARD":
+      return {
+        ...card,
+        editing: true
+      }
     default:
       return card
   }
@@ -87,6 +100,24 @@ function cardReducer(card, action) {
 function rootReducer(state = loadFromLocalStorage(), action) {
   switch (action.type) {
     case 'UPDATE_CARD_POSITION': {
+      return {
+        ...state,
+        board: {
+          ...state.board,
+          contents: state.board.contents.map(card => cardReducer(card, action))
+        }
+      }
+    }
+    case 'UPDATE_CARD': {
+      return {
+        ...state,
+        board: {
+          ...state.board,
+          contents: state.board.contents.map(card => cardReducer(card, action))
+        }
+      }
+    }
+    case 'EDIT_CARD': {
       return {
         ...state,
         board: {

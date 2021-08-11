@@ -12,14 +12,16 @@ import EditCardForm from './card/edit-card';
 export default function DashCard(props) {
   const card = props.card;
 
-  const [editing, setEditing] = useState(card.editing || false);
   const [position, setPosition] = useState(card.position || { x: 150, y: 150 });
   const initPos = card.position || { x: 150, y: 150 };
 
   const [delta, setDelta] = useState({ x: 0, y: 0 });
 
   const { show } = useContextMenu({ id: card.id });
-  function displayMenu(e) { show(e) }
+  function displayMenu(e) { 
+    e.stopPropagation();
+    show(e) 
+  }
 
   function handleItemClick({ event, props, triggerEvent, data }) {
     console.log(event, props, triggerEvent, data);
@@ -27,11 +29,20 @@ export default function DashCard(props) {
 
   function deleteCard(event) {
     store.dispatch({
-        type: "DELETE_CARD",
-        payload: {
-          id: card.id
-        }
-      })
+      type: "DELETE_CARD",
+      payload: {
+        id: card.id
+      }
+    })
+  }
+
+  function editCard(event) {
+    store.dispatch({
+      type: "EDIT_CARD",
+      payload: {
+        id: card.id
+      }
+    })
   }
 
 
@@ -40,7 +51,8 @@ export default function DashCard(props) {
     gridColumn: `${initPos.x} / ${initPos.x + 120}`
   };
   const editStyle = {
-    ...style,
+    gridRow: `${initPos.y} / ${initPos.y + 80}`,
+    gridColumn: `${initPos.x} / ${initPos.x + 120}`,
     transform: "scale(1.25)"
   }
 
@@ -66,27 +78,25 @@ export default function DashCard(props) {
     })
   }, [position])
 
-  if (!editing) {
+  if (!card.editing) {
 
-  return(
-    <>
-      <Draggable  bounds="parent" onDrag={handleDrag} onStop={handleDragStop} position={{x: 0, y:0}}>
-        <div className="Dash-Card" style={style} onContextMenu={show}>
-          <header style={{backgroundColor: card.color}}>
-            <strong>{card.title}</strong>
-          </header>
-          <p>{card.body}</p>
-        </div>
-      </Draggable>
-      <Menu id={card.id}>
-        <Item onClick={handleItemClick}>Edit</Item>
-        <Item onClick={deleteCard}>Delete</Item>
-        <Item disabled onClick={handleItemClick}>Complete</Item>
-        <Item disabled onClick={handleItemClick}>Inspect</Item>
-      </Menu>
-    </>
-  )
-  } else if (editing == true) {
+    return(
+      <>
+        <Draggable  bounds="parent" onDrag={handleDrag} onStop={handleDragStop} position={{x: 0, y:0}}>
+          <div className="Dash-Card" style={style} onContextMenu={displayMenu}>
+            <header style={{backgroundColor: card.color}}>
+              <strong>{card.title}</strong>
+            </header>
+            <p>{card.body}</p>
+          </div>
+        </Draggable>
+        <Menu id={card.id}>
+          <Item onClick={editCard}>Edit</Item>
+          <Item onClick={deleteCard}>Delete</Item>
+        </Menu>
+      </>
+    )
+  } else if (card.editing == true) {
     return(
       <>
         <div className="Dash-Card Dash-Card-Edit" style={editStyle}>
@@ -94,6 +104,7 @@ export default function DashCard(props) {
 
         </div>
       </>
+
     )
   }
 }

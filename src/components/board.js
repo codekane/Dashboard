@@ -24,14 +24,11 @@ export default function Board(props) {
   function newCard(event) {
     const bounds = event.triggerEvent.target.getBoundingClientRect()
     const trigger = event.triggerEvent;
-    console.log(event);
-    console.log(Math.round(event.triggerEvent.clientX - bounds.x ));
-    console.log(Math.round( event.triggerEvent.clientY - bounds.y));
 
     store.dispatch({
       type: "CREATE_CARD", payload: {
         title: "",
-        color: "teal",
+        color: "#9999FF",
         body: "",
         id: generateID(),
         editing: true,
