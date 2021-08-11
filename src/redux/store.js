@@ -30,39 +30,39 @@ const initialState = {
     name: "Personal",
     contents: [
       {
-        id: 90210,
-        color: "teal",
-        position: { x: 231, y: 248 },
-        title: "Dashboard",
-        body: test
+        id: 1628674142088,
+        color: "#7dfbff",
+        position: { x: 35, y: 197 },
+        title: "Drag Me!",
+        body: 'Figure out what\'s important',
       },
       {
-        id: 90211,
-        color: "magenta",
-        position: { x: 346, y: 336},
-        title: "Stonkk",
-        body: test
+        id: 1628674173378,
+        color: "#9999FF",
+        position: { x: 34, y: 328},
+        title: "Create Me!",
+        body: 'Right click on the board to begin'
       },
       {
-        id: 90212,
-        color: "pink",
-        position: { x: 15, y: 8 },
-        title: "Ryan Horricks",
-        body: test
+        id: 1628674191680,
+        color: "#d1ffee",
+        position: { x: 33, y: 462 },
+        title: 'Edit Me! Delete Me! ',
+        body: 'Right Click on the Card'
       },
       {
-        id: 90213,
-        color: "red",
-        position: { x: 120, y: 8 },
-        title: "Job Interview",
-        body: test
+        id: 1628674368383,
+        color: "#9999FF",
+        position: { x: 182, y: 53 },
+        title: "Personal Kanban",
+        body: 'Version 0.13'
       },
       {
-        id: 90214,
-        color: "purple",
-        position: { x: 240, y: 8 },
-        title: "Dashboard",
-        body: test
+        id: 1628674456874,
+        color: "#FF315C",
+        position: { x: 335, y: 192 },
+        title: 'Depend on Me?',
+        body: 'Development ongoing... But I use it.'
       }
     ]
   }
