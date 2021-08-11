@@ -39,7 +39,7 @@ export default function CardCreator(props) {
           <header style={{backgroundColor: color}}>
             <textarea type="text" name="title" 
               placeholder="Title" value={title} 
-              onChange={changeTitle} style={{marginTop: "10px", backgroundColor: color}}
+              onChange={changeTitle} style={{backgroundColor: color}}
               maxLength="20"/>
 
             <input id="ColorPicker"type="color" value={color} 

@@ -25,7 +25,6 @@ function App() {
       <div>
         <div className="DashBoard">
           <Board title="personal" id="test"/>
-          <CardCreator/>
         </div>
       </div>
 

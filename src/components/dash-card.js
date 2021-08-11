@@ -4,13 +4,15 @@ import store from '../redux/store';
 import { Menu, Item, Separator, Submenu, useContextMenu } from 'react-contexify';
 import 'react-contexify/dist/ReactContexify.css';
 
+import EditCardForm from './card/edit-card';
+
 
 
 
 export default function DashCard(props) {
   const card = props.card;
 
-  const [editing, setEditing] = useState(false);
+  const [editing, setEditing] = useState(card.editing || false);
   const [position, setPosition] = useState(card.position || { x: 150, y: 150 });
   const initPos = card.position || { x: 150, y: 150 };
 
@@ -37,6 +39,10 @@ export default function DashCard(props) {
     gridRow: `${initPos.y} / ${initPos.y + 80}`,
     gridColumn: `${initPos.x} / ${initPos.x + 120}`
   };
+  const editStyle = {
+    ...style,
+    transform: "scale(1.25)"
+  }
 
 
   const handleDrag = (e, ui) => {
@@ -73,7 +79,7 @@ export default function DashCard(props) {
         </div>
       </Draggable>
       <Menu id={card.id}>
-        <Item onClick={handleItemClick}>Edit></Item>
+        <Item onClick={handleItemClick}>Edit</Item>
         <Item onClick={deleteCard}>Delete</Item>
         <Item disabled onClick={handleItemClick}>Complete</Item>
         <Item disabled onClick={handleItemClick}>Inspect</Item>
@@ -83,7 +89,10 @@ export default function DashCard(props) {
   } else if (editing == true) {
     return(
       <>
-        <h1>PENIS</h1>
+        <div className="Dash-Card Dash-Card-Edit" style={editStyle}>
+          <EditCardForm card={card}/>
+
+        </div>
       </>
     )
   }
