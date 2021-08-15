@@ -40,7 +40,7 @@ body {
   grid-gap: 0px;
 
   max-width: 100%;
-  overflow-x: hidden;
+  //overflow-x: hidden;
 }
 
 /*

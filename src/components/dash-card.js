@@ -101,10 +101,8 @@ export default function DashCard(props) {
       <>
         <div className="Dash-Card Dash-Card-Edit" style={editStyle}>
           <EditCardForm card={card}/>
-
         </div>
       </>
-
     )
   }
 }
