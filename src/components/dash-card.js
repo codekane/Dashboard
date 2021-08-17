@@ -3,7 +3,7 @@ import Draggable, { DraggableCore } from 'react-draggable';
 import store from '../redux/store';
 import { Menu, Item, Separator, Submenu, useContextMenu } from 'react-contexify';
 import 'react-contexify/dist/ReactContexify.css';
-
+import { useSelector } from 'react-redux';
 import EditCardForm from './card/edit-card';
 
 
@@ -11,6 +11,9 @@ import EditCardForm from './card/edit-card';
 
 export default function DashCard(props) {
   const card = props.card;
+  const cardData = useSelector(state => state.cards[card.id]);
+
+  const [editing, setEditing]= useState(false);
 
   const [position, setPosition] = useState(card.position || { x: 150, y: 150 });
   const initPos = card.position || { x: 150, y: 150 };
@@ -31,18 +34,14 @@ export default function DashCard(props) {
     store.dispatch({
       type: "DELETE_CARD",
       payload: {
-        id: card.id
+        id: card.id,
+        board_id: cardData.board_id
       }
     })
   }
 
   function editCard(event) {
-    store.dispatch({
-      type: "EDIT_CARD",
-      payload: {
-        id: card.id
-      }
-    })
+    setEditing(true);
   }
 
 
@@ -73,21 +72,22 @@ export default function DashCard(props) {
       type: "UPDATE_CARD_POSITION",
       payload: {
         id: card.id,
+        board_id: cardData.board_id,
         position: position,
       }
     })
-  }, [position])
+  }, [position, cardData.board_id, card.id])
 
-  if (!card.editing) {
+  if (!editing) {
 
     return(
       <>
         <Draggable  bounds="parent" onDrag={handleDrag} onStop={handleDragStop} position={{x: 0, y:0}}>
           <div className="Dash-Card" style={style} onContextMenu={displayMenu}>
-            <header style={{backgroundColor: card.color}}>
-              <strong>{card.title}</strong>
+            <header style={{backgroundColor: cardData.color}}>
+              <strong>{cardData.title}</strong>
             </header>
-            <p>{card.body}</p>
+            <p>{cardData.body}</p>
           </div>
         </Draggable>
         <Menu id={card.id}>
@@ -96,10 +96,10 @@ export default function DashCard(props) {
         </Menu>
       </>
     )
-  } else if (card.editing == true) {
+  } else if (editing === true) {
     return(
       <>
-        <div className="Dash-Card Dash-Card-Edit" style={editStyle}>
+        <div className="Dash-Card Dash-Card-Edit" style={editStyle} edit={setEditing}>
           <EditCardForm card={card}/>
         </div>
       </>

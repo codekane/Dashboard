@@ -5,6 +5,15 @@ import store from '../redux/store';
 
 export default function Board(props) {
   const cards = useSelector(state => state.board.contents);
+  const board = useSelector(state => state.boards[props.id]);
+
+  const getCards = () => {
+    let keys = Object.keys(board.cards)
+    let out = []
+    keys.map(key =>  out.push(board.cards[key]) );
+    return out
+  }
+  const neuBoard = useSelector(state => state.boards[props.id]);
 
   const MENU_ID = props.id;
   const { show } = useContextMenu({
@@ -44,7 +53,7 @@ export default function Board(props) {
   return(
     <div className="Board">
       <div className="Board-Valid" onContextMenu={show}>
-        {cards.map(card => (<DashCard card={card} />)
+        {getCards().map(card => (<DashCard card={card} />)
         )}
       </div>
       <Menu id={props.id} style={{zIndex: 0}}>

@@ -26,7 +26,7 @@ function App() {
       <div>
         <div className="DashBoard">
           <BoardSelect />
-          <Board title="personal" id="test"/>
+          <Board title="personal" id="90210"/>
         </div>
       </div>
 

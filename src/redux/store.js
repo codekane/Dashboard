@@ -24,8 +24,7 @@ function loadFromLocalStorage() {
 }
 
 
-const test = "This is a test of the BODY system!!@!!!"
-
+// This needs to be totally re-worked. Leaving it in to avoid breaking, and show pattern.
 function cardReducer(card, action) {
   if (card.id !== action.payload.id) return card;
   switch (action.type) {
@@ -55,23 +54,80 @@ function cardReducer(card, action) {
 
 }
 
+function boardReducer(board, action) {
+  switch (action.type) {
+    case "UPDATE_CARD_POSITION":
+      let card_id = action.payload.id;
+      return {
+        ...board,
+        cards: {
+          ...board.cards,
+          [card_id]: {
+            ...board.cards[card_id],
+            position: action.payload.position
+          }
+        }
+      }
+    case "DELETE_CARD":
+      return {}
+    default:
+      return board
+  }
+}
+
+
+
 function rootReducer(state = loadFromLocalStorage(), action) {
   switch (action.type) {
     case 'UPDATE_CARD_POSITION': {
+      console.log("Updating Card Position");
+      let board_id = action.payload.board_id;
+      let card_id = action.payload.id;
       return {
         ...state,
-        board: {
-          ...state.board,
-          contents: state.board.contents.map(card => cardReducer(card, action))
+        boards: {
+          ...state.boards,
+          [board_id]: boardReducer(state.boards[board_id], action)
         }
       }
     }
-    case 'UPDATE_CARD': {
+    case 'DELETE_CARD': {
+      console.log("Deleting Card");
+      let board_id = action.payload.board_id;
+      let { [action.payload.id]: xx, ...deletedCardA } = state.cards;
+      let { [action.payload.id]: xxx, ...deletedCardB } = state.boards[action.payload.board_id].cards;
       return {
         ...state,
-        board: {
-          ...state.board,
-          contents: state.board.contents.map(card => cardReducer(card, action))
+        boards: {
+          ...state.boards,
+          [board_id]: {
+            ...state.boards[board_id],
+            //
+            cards: {
+              ...deletedCardB
+            }
+          }
+
+        },
+        cards: {
+          ...deletedCardA,
+        }
+      }
+    }
+
+
+    case 'UPDATE_CARD': {
+      let card_id = action.payload.id;
+      return {
+        ...state,
+        cards: {
+          ...state.cards,
+          [card_id]: {
+            ...state.cards[card_id],
+            title: action.payload.title,
+            color: action.payload.color,
+            body: action.payload.body
+          }
         }
       }
     }
@@ -84,15 +140,7 @@ function rootReducer(state = loadFromLocalStorage(), action) {
         }
       }
     }
-    case 'DELETE_CARD': {
-      return {
-        ...state,
-        board: {
-          ...state.board,
-          contents: state.board.contents.filter(card => card.id !== action.payload.id)
-        }
-      }
-    }
+
     case 'CREATE_CARD': {
       return {
         ...state,
