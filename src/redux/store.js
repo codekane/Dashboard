@@ -2,6 +2,7 @@ import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import initialState from './initialState';
+import boardReducer from './reducers/boardReducer';
 
 function saveToLocalStorage(state) {
   try {
@@ -54,67 +55,33 @@ function cardReducer(card, action) {
 
 }
 
-function boardReducer(board, action) {
-  switch (action.type) {
-    case "UPDATE_CARD_POSITION":
-      let card_id = action.payload.id;
-      return {
-        ...board,
-        cards: {
-          ...board.cards,
-          [card_id]: {
-            ...board.cards[card_id],
-            position: action.payload.position
-          }
-        }
-      }
-    case "DELETE_CARD":
-      return {}
-    default:
-      return board
-  }
-}
-
-
 
 function rootReducer(state = loadFromLocalStorage(), action) {
   switch (action.type) {
     case 'UPDATE_CARD_POSITION': {
       console.log("Updating Card Position");
-      let board_id = action.payload.board_id;
-      let card_id = action.payload.id;
       return {
         ...state,
         boards: {
           ...state.boards,
-          [board_id]: boardReducer(state.boards[board_id], action)
+          [action.payload.board_id]: boardReducer(state.boards[action.payload.board_id], action)
         }
       }
     }
     case 'DELETE_CARD': {
       console.log("Deleting Card");
-      let board_id = action.payload.board_id;
-      let { [action.payload.id]: xx, ...deletedCardA } = state.cards;
-      let { [action.payload.id]: xxx, ...deletedCardB } = state.boards[action.payload.board_id].cards;
+      let { [action.payload.id]: xx, ...updatedCards } = state.cards;
       return {
         ...state,
         boards: {
           ...state.boards,
-          [board_id]: {
-            ...state.boards[board_id],
-            //
-            cards: {
-              ...deletedCardB
-            }
-          }
-
+          [action.payload.board_id]: boardReducer(state.boards[action.payload.board_id], action)
         },
         cards: {
-          ...deletedCardA,
+          ...updatedCards,
         }
       }
     }
-
 
     case 'UPDATE_CARD': {
       let card_id = action.payload.id;
