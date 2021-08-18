@@ -4,31 +4,25 @@ import { Menu, Item, Separator, Submenu, useContextMenu } from 'react-contexify'
 import store from '../redux/store';
 
 export default function Board(props) {
-  const cards = useSelector(state => state.board.contents);
   const board = useSelector(state => state.boards[props.id]);
 
   const getCards = () => {
-    let keys = Object.keys(board.cards)
     let out = []
-    keys.map(key =>  out.push(board.cards[key]) );
+    Object.keys(board.cards).map(key =>  out.push(board.cards[key]) );
     return out
   }
-  const neuBoard = useSelector(state => state.boards[props.id]);
 
   const MENU_ID = props.id;
   const { show } = useContextMenu({
     id: props.id,
   });
 
-  function displayMenu(e) {
-    show(e)
-  }
+  function displayMenu(e) { show(e) }
 
   const generateID = () => {
     const d = new Date;
     return d.getTime();
   }
-
 
   function newCard(event) {
     const bounds = event.triggerEvent.target.getBoundingClientRect()
@@ -40,14 +34,19 @@ export default function Board(props) {
         color: "#9999FF",
         body: "",
         id: generateID(),
-        editing: true,
+        board_id: props.id,
+        status: {
+          editing: true,
+          complete: false,
+          discarded: false
+        },
         position: {
           x: Math.round(event.triggerEvent.clientX - bounds.x),
           y: Math.round(event.triggerEvent.clientY - bounds.y)
         }
       }
-
     })
+
   }
 
   return(

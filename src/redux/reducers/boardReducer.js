@@ -19,6 +19,17 @@ export default function boardReducer(board, action) {
           ...updated
         }
       }
+    case "CREATE_CARD":
+      return {
+        ...board,
+        cards: {
+          ...board.cards,
+          [action.payload.id]: {
+            id: action.payload.id,
+            position: action.payload.position
+          }
+        }
+      }
     default:
       return board
   }

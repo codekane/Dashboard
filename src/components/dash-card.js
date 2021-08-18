@@ -6,14 +6,9 @@ import 'react-contexify/dist/ReactContexify.css';
 import { useSelector } from 'react-redux';
 import EditCardForm from './card/edit-card';
 
-
-
-
 export default function DashCard(props) {
   const card = props.card;
   const cardData = useSelector(state => state.cards[card.id]);
-
-  const [editing, setEditing]= useState(false);
 
   const [position, setPosition] = useState(card.position || { x: 150, y: 150 });
   const initPos = card.position || { x: 150, y: 150 };
@@ -41,7 +36,14 @@ export default function DashCard(props) {
   }
 
   function editCard(event) {
-    setEditing(true);
+    store.dispatch({
+      type: "UPDATE_CARD_STATUS",
+      payload: {
+        id: card.id,
+        type: "editing",
+        status: true
+      }
+    })
   }
 
 
@@ -78,7 +80,7 @@ export default function DashCard(props) {
     })
   }, [position, cardData.board_id, card.id])
 
-  if (!editing) {
+  if (!cardData.status.editing) {
 
     return(
       <>
@@ -96,10 +98,10 @@ export default function DashCard(props) {
         </Menu>
       </>
     )
-  } else if (editing === true) {
+  } else if (cardData.status.editing === true) {
     return(
       <>
-        <div className="Dash-Card Dash-Card-Edit" style={editStyle} edit={setEditing}>
+        <div className="Dash-Card Dash-Card-Edit" style={editStyle}>
           <EditCardForm card={card}/>
         </div>
       </>

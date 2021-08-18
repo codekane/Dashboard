@@ -1,39 +1,21 @@
 import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import store from '../../redux/store';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
 export default function EditCardForm(props) {
   const card = props.card;
+  const cardData = useSelector(state => state.cards[props.card.id]);
 
-  const [title, setTitle] = useState(card.title || '');
-  const [body, setBody] = useState(card.body || '');
-  const [color, setColor] = useState(card.color);
+  const [title, setTitle] = useState(cardData.title || '');
+  const [body, setBody] = useState(cardData.body || '');
+  const [color, setColor] = useState(cardData.color || '#9999FF');
 
   const changeTitle = (event) => { setTitle(event.target.value); }
   const changeColor = (event) => { setColor(event.target.value); }
   const changeBody = (event) =>  { setBody(event.target.value); }
 
-  const generateID = () => {
-    const d = new Date;
-    return d.getTime();
-  }
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    store.dispatch({
-      type: "CREATE_CARD", payload: { 
-        title: title, 
-        color: color, 
-        body: body, 
-        id: generateID() 
-      }
-    })
-    setTitle('');
-    setBody('');
-    setColor('#9999FF');
-  }
-  
   const updateCard = (event) => {
     event.preventDefault();
     store.dispatch({

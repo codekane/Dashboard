@@ -85,7 +85,11 @@ const initialState = {
       title: 'Depend on Me?',
       color: "#FF315C",
       body: 'Development ongoing... But I use it.',
-      status: 'active'
+      status: {
+        editing: false,
+        complete: false,
+        discarded: false
+      }
     },
     1628674368383: {
       id: 1628674368383,
@@ -93,15 +97,24 @@ const initialState = {
       title: "Personal Kanban",
       color: "#9999FF",
       body: 'Version 0.20',
-      status: 'active'
+      status: {
+        editing: false,
+        complete: false,
+        discarded: false
+      }
     },
+
     1628674191680: {
       id: 1628674191680,
       board_id: 90210,
       title: 'Edit Me! Delete Me!',
       color: "#d1ffee",
       body: 'Right Click on the Card',
-      status: 'active'
+      status: {
+        editing: true,
+        complete: false,
+        discarded: false
+      }
     },
     1628674173378: {
       id: 1628674173378,
@@ -109,7 +122,11 @@ const initialState = {
       title: "Create Me!",
       color: "#9999FF",
       body: 'Right click on the board to begin',
-      status: 'active'
+      status: {
+        editing: false,
+        complete: false,
+        discarded: false
+      }
     },
     1628674142088: {
       id: 1628674142088,
@@ -117,7 +134,11 @@ const initialState = {
       title: "Drag Me!",
       color: "#7dfbff",
       body: 'Figure out what\'s important',
-      status: 'active'
+      status: {
+        editing: false,
+        complete: false,
+        discarded: false
+      }
     }
   },
   comments: {

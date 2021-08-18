@@ -82,6 +82,61 @@ function rootReducer(state = loadFromLocalStorage(), action) {
         }
       }
     }
+    case 'UPDATE_CARD_STATUS': {
+      console.log("Updating Card Status");
+      return {
+        ...state,
+        cards: {
+          ...state.cards,
+          [action.payload.id]: {
+            ...state.cards[action.payload.id],
+            status: {
+              ...state.cards[action.payload.id][action.payload.status],
+              [action.payload.type]: action.payload.status
+            }
+          }
+        }
+
+      }
+    }
+    case 'CREATE_CARD': {
+      return {
+        ...state,
+        boards: {
+          ...state.boards,
+          [action.payload.board_id]: boardReducer(state.boards[action.payload.board_id], action)
+        },
+        cards: {
+          ...state.cards,
+          [action.payload.id]: {
+            id: action.payload.id,
+            board_id: action.payload.board_id,
+            title: action.payload.title,
+            color: action.payload.color,
+            body: action.payload.body,
+            status: action.payload.status
+          }
+        }
+      }
+    }
+    case 'UPDATE_CARD': {
+      return {
+        ...state,
+        cards: {
+          ...state.cards,
+          [action.payload.id]: {
+            ...state.cards[action.payload.id],
+            title: action.payload.title,
+            color: action.payload.color,
+            body: action.payload.body,
+            status: {
+              ...state.cards[action.payload.id].status,
+              editing: false
+            }
+          }
+        }
+      }
+    }
 
     case 'UPDATE_CARD': {
       let card_id = action.payload.id;
@@ -108,18 +163,6 @@ function rootReducer(state = loadFromLocalStorage(), action) {
       }
     }
 
-    case 'CREATE_CARD': {
-      return {
-        ...state,
-        board: {
-          ...state.board,
-          contents: [
-            ...state.board.contents,
-            action.payload
-          ]
-        }
-      }
-    }
     default:
       return state
   }
