@@ -3,6 +3,7 @@ import thunkMiddleware from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import initialState from './initialState';
 import boardReducer from './reducers/boardReducer';
+import cardReducer from './reducers/cardReducer';
 
 function saveToLocalStorage(state) {
   try {
@@ -22,37 +23,6 @@ function loadFromLocalStorage() {
   } catch (e) {
     console.warn(e);
   }
-}
-
-
-// This needs to be totally re-worked. Leaving it in to avoid breaking, and show pattern.
-function cardReducer(card, action) {
-  if (card.id !== action.payload.id) return card;
-  switch (action.type) {
-    case "UPDATE_CARD_POSITION":
-      return Object.assign({}, card, { position: action.payload.position })
-    case "UPDATE_CARD":
-      return {
-        ...card,
-        title: action.payload.title,
-        color: action.payload.color,
-        body: action.payload.body,
-        editing: false
-      }
-    case "EDIT_CARD":
-      return {
-        ...card,
-        editing: true
-      }
-    default:
-      return card
-  }
-  //return Object.assign({}, card, { position: action.payload.position })
-  return {
-    ...card,
-    position: action.payload.position
-  }
-
 }
 
 
@@ -88,15 +58,8 @@ function rootReducer(state = loadFromLocalStorage(), action) {
         ...state,
         cards: {
           ...state.cards,
-          [action.payload.id]: {
-            ...state.cards[action.payload.id],
-            status: {
-              ...state.cards[action.payload.id][action.payload.status],
-              [action.payload.type]: action.payload.status
-            }
-          }
+          [action.payload.id]: cardReducer(state.cards[action.payload.id], action)
         }
-
       }
     }
     case 'CREATE_CARD': {
@@ -108,14 +71,7 @@ function rootReducer(state = loadFromLocalStorage(), action) {
         },
         cards: {
           ...state.cards,
-          [action.payload.id]: {
-            id: action.payload.id,
-            board_id: action.payload.board_id,
-            title: action.payload.title,
-            color: action.payload.color,
-            body: action.payload.body,
-            status: action.payload.status
-          }
+          [action.payload.id]: cardReducer(state.cards[action.payload.id], action)
         }
       }
     }
@@ -124,45 +80,10 @@ function rootReducer(state = loadFromLocalStorage(), action) {
         ...state,
         cards: {
           ...state.cards,
-          [action.payload.id]: {
-            ...state.cards[action.payload.id],
-            title: action.payload.title,
-            color: action.payload.color,
-            body: action.payload.body,
-            status: {
-              ...state.cards[action.payload.id].status,
-              editing: false
-            }
-          }
+          [action.payload.id]: cardReducer(state.cards[action.payload.id], action)
         }
       }
     }
-
-    case 'UPDATE_CARD': {
-      let card_id = action.payload.id;
-      return {
-        ...state,
-        cards: {
-          ...state.cards,
-          [card_id]: {
-            ...state.cards[card_id],
-            title: action.payload.title,
-            color: action.payload.color,
-            body: action.payload.body
-          }
-        }
-      }
-    }
-    case 'EDIT_CARD': {
-      return {
-        ...state,
-        board: {
-          ...state.board,
-          contents: state.board.contents.map(card => cardReducer(card, action))
-        }
-      }
-    }
-
     default:
       return state
   }
