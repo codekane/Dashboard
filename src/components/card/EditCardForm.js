@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import store from '../../redux/store';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import './EditCardForm.css';
 
 export default function EditCardForm(props) {
   const card = props.card;
