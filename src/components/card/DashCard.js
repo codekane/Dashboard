@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import Draggable, { DraggableCore } from 'react-draggable';
-import store from '../redux/store';
+import store from '../../redux/store';
 import { Menu, Item, Separator, Submenu, useContextMenu } from 'react-contexify';
 import 'react-contexify/dist/ReactContexify.css';
 import { useSelector } from 'react-redux';
-import EditCardForm from './card/edit-card';
+import EditCardForm from './EditCardForm';
+import './DashCard.css';
 
 export default function DashCard(props) {
   const card = props.card;

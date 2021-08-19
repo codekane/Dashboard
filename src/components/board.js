@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import DashCard from './dash-card';
+import DashCard from './card/DashCard';
 import { Menu, Item, Separator, Submenu, useContextMenu } from 'react-contexify';
 import store from '../redux/store';
 

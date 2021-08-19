@@ -4,8 +4,7 @@ import Draggable from 'react-draggable';
 
 import NavBar from './components/navbar.js';
 import AppHeader from './components/header';
-import DashCard from './components/dash-card';
-import CardCreator from './components/card-creator';
+import DashCard from './components/card/DashCard';
 import Board from './components/board';
 import BoardSelect from './components/BoardSelect';
 import { useEffect } from 'react';
