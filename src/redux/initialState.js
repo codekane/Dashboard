@@ -39,6 +39,7 @@ const initialState = {
       }
     ]
   },
+  activeBoard: 90210,
   boards: {
     90210: {
       id: 90210,

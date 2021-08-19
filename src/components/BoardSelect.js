@@ -1,10 +1,12 @@
 import store from '../redux/store';
 import { useSelector } from 'react-redux';
 import { boardsSelector } from '../redux/selectors';
+import BoardSelectItem from './BoardSelectItem';
 
 
 export default function BoardSelect(props) {
   let boards = useSelector(state => state.boards)
+  let activeBoard = useSelector(state => state.activeBoard);
 
   const getBoards = () => {
     let keys = Object.keys(boards);
@@ -16,9 +18,9 @@ export default function BoardSelect(props) {
   }
 
   return (
-    <div id="BoardSelect" style={{width: "150px", height: "100px", backgroundColor: "teal"}}>
+    <div id="BoardSelect">
       <ul>
-        {getBoards().map(board => (<li id={board.id}>{board.title}</li>))}
+        {getBoards().map(board => (<BoardSelectItem board={board} activeBoard={activeBoard}/>))}
         <li>Add New</li>
       </ul>
 

@@ -84,6 +84,12 @@ function rootReducer(state = loadFromLocalStorage(), action) {
         }
       }
     }
+    case 'SELECT_BOARD': {
+      return {
+        ...state,
+        activeBoard: action.payload.board
+      }
+    }
     default:
       return state
   }
