@@ -15,6 +15,7 @@ body {
   width: 100%;
   display: flex;
   justify-content: center;
+  margin-top: 10px;
 }
 
 /*
@@ -69,7 +70,7 @@ body {
 #BoardSelect {
   //width: 150px;
   height: 100px;
-  background-color: white;
+  //background-color: white;
 }
 
 #BoardSelect ul {
@@ -77,9 +78,15 @@ body {
 }
 
 #BoardSelect ul li {
+  background-color: white;
   list-style-type: none;
   padding-left: 12px;
   padding-right: 12px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  border-radius: 10px 0px 0px 10px;
 }
 
 #BoardSelect ul li:hover {
@@ -94,10 +101,14 @@ body {
   color: white;
 }
 
-.NavBar #Brand {
+#Brand {
   font-weight: 700;
   font-size: 20px;
   padding: 5px;
+  color: white;
+  width: 100px;
+  text-align: center;
+  padding-right: 15px;
 }
 
 /*

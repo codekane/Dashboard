@@ -14,7 +14,10 @@ export default function BoardSelectItem(props) {
       return {
         backgroundColor: "teal"
       }
-    } else { return {}  }
+    } else { 
+      return {
+      }
+    }
   }
 
   return(

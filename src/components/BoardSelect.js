@@ -19,6 +19,8 @@ export default function BoardSelect(props) {
 
   return (
     <div id="BoardSelect">
+
+      <b><span id="Brand" style={{marginLeft: "15px"}}>Dashboard</span></b>
       <ul>
         {getBoards().map(board => (<BoardSelectItem board={board} activeBoard={activeBoard}/>))}
         <li>Add New</li>

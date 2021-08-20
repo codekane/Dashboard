@@ -79,7 +79,7 @@ export default function DashCard(props) {
         position: position,
       }
     })
-  }, [position, cardData.board_id, card.id])
+  }, [position])
 
   if (!cardData.status.editing) {
 

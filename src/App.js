@@ -23,7 +23,6 @@ function App() {
     <div className="App">
 
 
-      <NavBar/>
       <div>
         <div className="DashBoard">
           <BoardSelect />
