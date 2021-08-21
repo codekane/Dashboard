@@ -40,6 +40,7 @@ const initialState = {
     ]
   },
   activeBoard: 90210,
+  version: 0.2,
   boards: {
     90210: {
       id: 90210,
