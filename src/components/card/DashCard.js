@@ -119,7 +119,6 @@ export default function DashCard(props) {
           <Item onClick={completeCard}>Complete</Item>
           <Item onClick={editCard}>Edit</Item>
           <Item onClick={discardCard}>Discard</Item>
-          <Item disabled onClick={deleteCard}>Delete</Item>
         </Menu>
       </>
     )
