@@ -16,6 +16,25 @@ body {
   display: flex;
   justify-content: center;
   margin-top: 10px;
+  margin: 0 auto;
+  max-width: 600px;
+  flex-wrap: wrap;
+}
+
+.DashBoardNav {
+  height: 40px;
+  font-size: 1.2em;
+  width: 100%;
+  flex-basis: 100%;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  background-color: #282c34;
+  z-index: 500;
+  border-bottom: 1px solid white;
 }
 
 /*
@@ -23,12 +42,18 @@ body {
  * BOARD */
 
 .Board {
-  width: 460px;
+  width: 462px;
   height: 660px;
   display: block;
-  border: 1px solid white;
   overflow-y: scroll;
   scrollbar-width: none;
+}
+
+.Board-Valid {
+  border-left: 1px solid white;
+  border-right: 1px solid white;
+  border-bottom: 1px solid white;
+
 }
 
 // Necessary for Chromium-Based Browsers
@@ -71,6 +96,7 @@ body {
   //width: 150px;
   height: 100px;
   //background-color: white;
+  margin-top: 40px;
 }
 
 #BoardSelect ul {

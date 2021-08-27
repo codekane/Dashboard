@@ -36,6 +36,28 @@ export default function DashCard(props) {
     })
   }
 
+  function completeCard(event) {
+    store.dispatch({
+      type: "UPDATE_CARD_STATUS",
+      payload: {
+        id: card.id,
+        type: "complete",
+        status: true
+      }
+    })
+  }
+
+  function discardCard(event) {
+    store.dispatch({
+      type: "UPDATE_CARD_STATUS",
+      payload: {
+        id: card.id,
+        type: "discarded",
+        status: true
+      }
+    })
+  }
+
   function editCard(event) {
     store.dispatch({
       type: "UPDATE_CARD_STATUS",
@@ -94,8 +116,10 @@ export default function DashCard(props) {
           </div>
         </Draggable>
         <Menu id={card.id}>
+          <Item onClick={completeCard}>Complete</Item>
           <Item onClick={editCard}>Edit</Item>
-          <Item onClick={deleteCard}>Delete</Item>
+          <Item onClick={discardCard}>Discard</Item>
+          <Item disabled onClick={deleteCard}>Delete</Item>
         </Menu>
       </>
     )

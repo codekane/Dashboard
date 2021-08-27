@@ -21,11 +21,50 @@ export default function cardReducer(card, action) {
         }
       }
     case 'UPDATE_CARD_STATUS':
-      return {
-        ...card,
-        status: {
-          ...card.status,
-          [action.payload.type]: action.payload.status
+      if (action.payload.type === "editing") {
+        return {
+          ...card,
+          status: {
+            ...card.status,
+            [action.payload.type]: action.payload.status
+          }
+        }
+      }
+      else if (action.payload.type === "complete" && action.payload.status === true) {
+        return {
+          ...card,
+          completed_on: Date.now(),
+          status: {
+            ...card.status,
+            [action.payload.type]: action.payload.status
+          }
+        }
+      } else if (action.payload.type === "complete" && action.payload.status === false) {
+        return {
+          ...card,
+          completed_on: undefined,
+          status: {
+            ...card.status,
+            [action.payload.type]: action.payload.status
+          }
+        }
+      } else if (action.payload.type === "discarded" && action.payload.status === true) {
+        return {
+          ...card,
+          discarded_on: Date.now(),
+          status: {
+            ...card.status,
+            [action.payload.type]: action.payload.status
+          }
+        }
+      } else if (action.payload.type === "discarded" && action.payload.status === false) {
+        return {
+          ...card,
+          discarded_on: undefined,
+          status: {
+            ...card.status,
+            [action.payload.type]: action.payload.status
+          }
         }
       }
     default:

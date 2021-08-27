@@ -2,14 +2,18 @@ import { useSelector } from 'react-redux';
 import DashCard from './card/DashCard';
 import { Menu, Item, Separator, Submenu, useContextMenu } from 'react-contexify';
 import store from '../redux/store';
+import DashBoardNav from './DashBoardNav';
 
 export default function Board(props) {
   const board = useSelector(state => state.boards[props.id]);
+  const cards = useSelector(state => state.cards);
 
   const getCards = () => {
     let out = []
     Object.keys(board.cards).map(key =>  out.push(board.cards[key]) );
-    return out
+
+    return out.filter(card => cards[card.id].status.complete != true && cards[card.id].status.discarded != true);
+
   }
 
   const MENU_ID = props.id;
@@ -51,6 +55,7 @@ export default function Board(props) {
 
   return(
     <div className="Board">
+      <DashBoardNav/>
       <div className="Board-Valid" onContextMenu={show}>
         {getCards().map(card => (<DashCard card={card} />)
         )}

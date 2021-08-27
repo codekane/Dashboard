@@ -25,8 +25,10 @@ function App() {
 
       <div>
         <div className="DashBoard">
-          <BoardSelect />
-          <Board title="personal" id={activeBoard}/>
+          <div style={{display: "flex"}}>
+            <BoardSelect />
+            <Board id={activeBoard}/>
+          </div>
         </div>
       </div>
 
