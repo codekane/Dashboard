@@ -1,0 +1,62 @@
+/*
+ *
+ * BOARD */
+
+.Board {
+  width: 462px;
+  height: 660px;
+  display: block;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  border-bottom: 1px solid white;
+}
+
+.Board-Valid {
+  border-left: 1px solid white;
+  border-right: 1px solid white;
+}
+
+// Necessary for Chromium-Based Browsers
+.Board::-webkit-scrollbar {
+  display: none;
+}
+
+.Board-Valid {
+  width: 460px;
+  height: 990px;
+  position: relative;
+
+  display: grid;
+  grid-template-columns: repeat(462, 1px [x]);
+  grid-template-rows: repeat(992, 1px [y]);
+  grid-gap: 0px;
+
+  max-width: 100%;
+  //overflow-x: hidden;
+}
+
+.DashBoard {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  margin: 0 auto;
+  max-width: 600px;
+  flex-wrap: wrap;
+}
+
+.DashBoardNav {
+  height: 40px;
+  font-size: 1.2em;
+  width: 100%;
+  flex-basis: 100%;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  background-color: #282c34;
+  z-index: 500;
+  border-bottom: 1px solid white;
+}

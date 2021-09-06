@@ -1,8 +1,9 @@
 import { useSelector } from 'react-redux';
-import DashCard from './card/DashCard';
+import DashCard from '../card/DashCard';
 import { Menu, Item, Separator, Submenu, useContextMenu } from 'react-contexify';
-import store from '../redux/store';
+import store from '../../redux/store';
 import DashBoardNav from './DashBoardNav';
+import './Board.css';
 
 export default function Board(props) {
   const board = useSelector(state => state.boards[props.id]);
