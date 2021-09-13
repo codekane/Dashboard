@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import DashCard from '../card/DashCard';
 import { Menu, Item, Separator, Submenu, useContextMenu } from 'react-contexify';
 import store from '../../redux/store';
-import DashBoardNav from './DashBoardNav';
+import BoardNav from '../board-nav/BoardNav';
 import './Board.css';
 
 export default function Board(props) {
@@ -56,7 +56,7 @@ export default function Board(props) {
 
   return(
     <div className="Board">
-      <DashBoardNav/>
+      <BoardNav/>
       <div className="Board-Valid" onContextMenu={show}>
         {getCards().map(card => (<DashCard card={card} />)
         )}

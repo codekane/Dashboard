@@ -44,25 +44,3 @@
   max-width: 600px;
   flex-wrap: wrap;
 }
-
-.DashBoardNav {
-  height: 40px;
-  font-size: 1.2em;
-  width: 100%;
-  flex-basis: 100%;
-  color: white;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: sticky;
-  top: 0;
-  background-color: #282c34;
-  z-index: 500;
-  border-bottom: 1px solid white;
-}
-
-.DashBoardNav p {
-  padding-left: 5px;
-  padding-right: 5px;
-
-}
