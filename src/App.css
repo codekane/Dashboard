@@ -35,6 +35,13 @@ body {
   margin-top: 40px;
 }
 
+@media screen and (max-width: 500px) {
+  #BoardSelect {
+    display: none;
+  }
+
+}
+
 #BoardSelect ul {
   padding: 0;
 }
