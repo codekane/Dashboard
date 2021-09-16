@@ -22,13 +22,10 @@ function App() {
   return (
     <div className="App">
 
-
-      <div>
-        <div className="DashBoard">
-          <div style={{display: "flex"}}>
-            <BoardSelect />
-            <Board id={activeBoard}/>
-          </div>
+      <div className="DashBoard">
+        <div style={{display: "flex"}}>
+          <BoardSelect />
+          <Board id={activeBoard}/>
         </div>
       </div>
 

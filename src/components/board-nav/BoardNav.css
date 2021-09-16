@@ -2,6 +2,7 @@
   height: 40px;
   font-size: 1.2em;
   width: 100%;
+  max-width: 100vw;
   flex-basis: 100%;
   color: white;
   display: flex;
@@ -12,6 +13,16 @@
   background-color: #282c34;
   z-index: 500;
   border-bottom: 1px solid white;
+}
+
+@media screen and (max-width: 500px) {
+  .DashBoardNav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+
 }
 
 .DashBoardNav p {

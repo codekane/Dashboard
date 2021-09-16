@@ -11,6 +11,13 @@
   border-bottom: 1px solid white;
 }
 
+@media screen and (max-width: 500px) {
+  .Board {
+    margin-top: 42px;
+    margin-left: 360px;
+  }
+}
+
 .Board-Valid {
   border-left: 1px solid white;
   border-right: 1px solid white;
@@ -31,7 +38,7 @@
   grid-template-rows: repeat(992, 1px [y]);
   grid-gap: 0px;
 
-  max-width: 100%;
+  //max-width: 100%;
   //overflow-x: hidden;
 }
 
@@ -41,6 +48,6 @@
   justify-content: center;
   margin-top: 10px;
   margin: 0 auto;
-  max-width: 600px;
+  //max-width: 600px;
   flex-wrap: wrap;
 }
